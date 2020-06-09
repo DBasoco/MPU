@@ -5,4 +5,6 @@ So, in 2019 a group of researchers discovered that the card game Magic: The Gath
 
 To overcome this I've decided to code a virtual game of MTG that gives steps to follow as you play. This will make executing the machine far easier and circumvents the need to buy the real deck. Of course, servers to run MTG already exist, the difference being is that this one has the added feature of walking you through which cards to play and when so that you can make an analog computer on your digital computer. 
 
+The server will also have the original paper uploaded for pursusal. 
+
 This is also an exploration into object-oriented programming, Git sharing, and possibly server architecture once the server is created. Please enjoy going over the code. I hope to have a functioning game/server in 3/5 months. 
