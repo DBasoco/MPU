@@ -31,43 +31,38 @@ class Card:
             tapped = False
         return tapped
 
-    # color options: green, blue, black, white, red, void
-    # card types needed: enchantment, planeswalker, land, creature, sorcery, artifact, instant, health
-
-    def play(self): # so this system won't work, I need mana values as a enumerate not a list
-        if mana >= cost:
-            self.local = field
-
 
 class Enchantment(Card):
 
-    def __init__(self, target):
+    def __init__(self, cost, local, tapped, color, att, target):
+        super().__init__(cost, local, tapped, color, att)
         self.target = target
 
     def enchant(self, target):
-        target += self.att
+        target.att += self.att
 
 
 
 class Planeswalker(Card):
 
-    def __init__(self, loyalty):
+    def __init__(self, cost, local, tapped, color, att, loyalty):
+        super().__init__(cost, local, tapped, color, att)
         self.loyalty = loyalty
 
     def cl(self, nc=0):
         self.loyalty += nc
 
-MANA = [[], [], [], [], [], []] # so when we start a new turn this resets
-
 class Land(Card):
 
     def add_mana(self):
         COLORS = 'WUBRGV'
+        self.tap()
         if self.tapped:
             for i in COLORS:
                 if self.color == i:
-                    MANA[COLORS.index(i)] += i
-
+                    My.MANA[COLORS.index(i)] += i  # will change to make turn based
+                    if not self.color == 'V':
+                        My.MANA[5] += 'V'
 
 
 class Creature(Card):
@@ -110,7 +105,9 @@ class Creature(Card):
 
 class Sorcery(Card):
 
-    def __init__(self):
+    def __init__(self, cost, local, tapped, color, att, target):
+        super().__init__(cost, local, tapped, color, att)
+        self.target = target
         if not phase == 'main' or 'again':
             # card can't be played
 
@@ -118,11 +115,12 @@ class Sorcery(Card):
 
 class Instant(Card):
 
-    def __init__(self):
-
-
+    def __init__(self, cost, local, tapped, color, att, target):
+        super().__init__(cost, local, tapped, color, att)
+        self.target = target
 
 
 class Artifact(Card):
 
-    def __init__(self):
+    def __init__(self, cost, local, tapped, color, att):
+        super().__init__(cost, local, tapped, color, att)
