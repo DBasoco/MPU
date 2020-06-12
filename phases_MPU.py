@@ -36,11 +36,17 @@ class Player:  # so the player is the one with health, mana, and has all the loc
         self.graveyard = Location()
         self.exile = Location()
         self.MANA = [[], [], [], [], [], []]
+        self.turn = False
+
+
+My = Player()
+Opp = Player()
 
 
 def start(mull=0):  # starts the game off
-    shuffle()
-    deck.draw(7-mull)
+    shuffle(My.deck)
+    shuffle(Opp.deck)
+    My.deck.draw(7-mull)
     if mull == 7:
         return print('You lose!')
 

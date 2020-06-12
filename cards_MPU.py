@@ -2,7 +2,7 @@
 
 class Card:
 
-    def __init__(self, cost, local=deck, tapped=False, color='', att=''):  # creates the parent class for cards, with each having a mana cost to play, whether it enters tapped or not, and color
+    def __init__(self, cost, local, tapped=False, color='', att=''):  # creates the parent class for cards, with each having a mana cost to play, whether it enters tapped or not, and color
         """
 
         :type local: list
@@ -51,6 +51,7 @@ class Planeswalker(Card):
 
     def cl(self, nc=0):
         self.loyalty += nc
+
 
 class Land(Card):
 
@@ -102,7 +103,6 @@ class Creature(Card):
             Player.health = Player.health - mark.toughness
 
 
-
 class Sorcery(Card):
 
     def __init__(self, cost, local, tapped, color, att, target):
@@ -110,7 +110,6 @@ class Sorcery(Card):
         self.target = target
         if not phase == 'main' or 'again':
             # card can't be played
-
 
 
 class Instant(Card):
