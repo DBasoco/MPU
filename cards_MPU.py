@@ -80,28 +80,6 @@ class Creature(Card):
         self.power = power
         self.toughness = toughness
 
-    def attack(self, mark_a):  # attacking taps but doesn't have a set mark
-        self.mark_a = mark_a
-        self.tap()
-
-    def defend(self, mark):  # there is so much to unpack in combat, mad respect for those that coded the real game
-        if not 'Fly' in mark.att:
-            self.toughness = self.toughness - mark.power
-            mark.toughness = mark.toughness - self.power
-
-            if self.toughness <= 0:
-                self.local = graveyard
-                self.local += self.creature
-            if mark.toughness <= 0:
-                self.local = graveyard
-                self.local += self.creature
-            if mark.trait == 'Deathtouch':  # do I even need to worry about these traits?
-                self.local = graveyard
-                self.local += self.creature
-
-        else:
-            Player.health = Player.health - mark.toughness
-
 
 class Sorcery(Card):
 

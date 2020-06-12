@@ -38,6 +38,29 @@ class Player:  # so the player is the one with health, mana, and has all the loc
         self.MANA = [[], [], [], [], [], []]
         self.turn = False
 
+    def defend(self, wall, mark):  # combat is so annoying
+        if not 'Fly' in mark.att:
+            if not 'First Strike' in mark.att:
+                wall.toughness = wall.toughness - mark.power
+                mark.toughness = mark.toughness - wall.power
+
+                if wall.toughness <= 0:
+                    wall.move_card(My.graveyard)
+                if mark.toughness <= 0:
+                    mark.move_card(Opp.graveyard)
+                if mark.trait == 'Deathtouch':
+                    wall.move_card(My.graveyard)
+            else:
+                wall.toughness = wall.toughness - mark.power
+                if wall.toughness <= 0:
+                    wall.move_card(My.graveyard)
+                else:
+                    mark.toughness = mark.toughness - wall.power
+                    if mark.toughness <= 0:
+                        mark.move_card(Opp.graveyard)
+        else:
+            self.health = self.health - mark.toughness
+
 
 My = Player()
 Opp = Player()
