@@ -18,8 +18,6 @@ class Card:
         self.color = color # what color is the card
         self.att = att # what special ability the card has
 
-    # color options: green, blue, black, white, red, void
-
     def move_card(self, target):
         target.items.append(self)
         self.local.items.remove(self)
@@ -38,22 +36,22 @@ class Enchantment(Card):
         super().__init__(cost, local, tapped, color, att)
         self.target = target
 
-    def enchant(self, target):
+    def enchant(self, target): # enchantments modify the attributes of what they enchant
         target.att += self.att
 
 
 
 class Planeswalker(Card):
 
-    def __init__(self, cost, local, tapped, color, att, loyalty):
+    def __init__(self, cost, local, tapped, color, att, loyalty): # they act as a creature and a player, very strange
         super().__init__(cost, local, tapped, color, att)
         self.loyalty = loyalty
 
-    def cl(self, nc=0):
+    def change_loyalty(self, nc=0):
         self.loyalty += nc
 
 
-class Land(Card):
+class Land(Card): # automatic __init__ from parent and builds up a pool
 
     def add_mana(self):
         COLORS = 'WUBRGV'
@@ -76,7 +74,7 @@ class Creature(Card):
         :type att: str
 
         """
-        super().__init__(cost, local, tapped, color, att)
+        super().__init__(cost, local, tapped, color, att) # they have damage and defense stats
         self.power = power
         self.toughness = toughness
 
