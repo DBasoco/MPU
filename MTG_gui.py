@@ -4,6 +4,13 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 
+from tkinter import *
+
+# still deciding which interface to use
+
+class Root(Tk)
+
+
 
 def window(): # simply learning how to use the system to make a gui
     app = QApplication(sys.argv)
