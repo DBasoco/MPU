@@ -25,7 +25,7 @@
 # 1-5 hours a day
 # total coding time should be 450 hours
 # 30 lines an hour
-# will be 13500 lines, this is very much on the high end in my view at this time
+# will be 2000 lines, this is very much on the high end in my view at this time
 
 ## indicates it is being worked on
 ### indicates it is finished
@@ -45,12 +45,12 @@
     ## drawing cards
     ## define players
     ## phases
-        # beginning a turn
-        # main
+        ## beginning a turn
+        ## main
         ## combat
         # again
         # end
-# define each card (this and the GUI should take the longest amount of time)
+## define each card (this and the GUI should take the longest amount of time)
 # develop GUI (either here or in the next stage is when I will add the guided assitant for players)
 # create website
 # finished
