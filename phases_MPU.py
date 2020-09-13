@@ -20,13 +20,23 @@ class Location:
             else:
                 print('GAME OVER')
 
-    def play(self, num, target):
-        if len(My.MANA[5]) >= self.items[num - 1].cost:  # will adjust to make turn based
-            target.items.append(self.items[num - 1])
-            self.items.remove(self.items[num - 1])
+    def play(self, id, target):
+        num = self.reveal().index(id)
+        if len(My.MANA[5]) >= self.items[num].cost:
+            target.items.append(self.items[num])
+            self.items.remove(self.items[num])
 
-        if object(target) == Land():
+        if type(target) == Land:
             My.lands += self
+
+    def reveal(self, num=0):
+        x = []
+        if num == 0:
+            for i in range(0, len(self.items)):
+                x += [self.items[i].name]
+            return x
+        else:
+            pass
 
 
 class Player:  # so the player is the one with health, mana, and has all the locations
@@ -100,7 +110,8 @@ def shuffle(target):  # shuffles target: can be deck, hand, graveyard, etc
 
 
 def begin():
-    phase = 'Begin'
+    phase = ''
+    phase = ''.join('Begin')
     for each in lands:
         each.tap()
     My.deck.draw()
