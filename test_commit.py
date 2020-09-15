@@ -54,13 +54,15 @@ class Location:
                 print('GAME OVER')
 
     def play(self, id, target):
+        if type(target) == Land:
+            My.lands += self  # so we need a player quality that has lands as a instantiation
+
         num = self.reveal().index(id)
         if len(My.MANA[5]) >= self.items[num].cost:
             target.items.append(self.items[num])
             self.items.remove(self.items[num])
-
-        if type(target) == Land:
-            My.lands += self  # so we need a player quality that has lands as a instantiation
+        else:
+            print("Not enough mana... \nDon't miss those land drops.")
 
     def reveal(self, num=0):
         x = []
@@ -107,7 +109,7 @@ class Card:
 
         if type(self) == Creature:
             print('%s is a %s/%s for %s, that reads: "%s"' % (self.name, self.power, self.toughness, self.cost, self.att))
-        
+
 
 class Land(Card):
 
@@ -168,7 +170,7 @@ you cast has replicate. The replicate cost is equal to its mana cost.""", 3, 5)
 
 Fathom_Feeder = Creature('Fathom Feeder', 2, My.deck, False, 'V', """Deathtouch. Ingest. VVVUB: Draw """, 1, 1)
 
-Fungus_Silver = Creature('Fungus Silver', 4, My.deck, False, 'G', """All Silver creatures have 'Whenever this           
+Fungus_Sliver = Creature('Fungus Sliver', 4, My.deck, False, 'G', """All Silver creatures have 'Whenever this           
 creature is dealt damage, put a +1/+1 counter on is.'""", 2, 2)
 
 Memnarch = Creature('Memnarch', 7, My.deck, False, 'V', """(VBB): Target permanent becomes an artifact in addition to   

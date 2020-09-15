@@ -66,7 +66,7 @@ you cast has replicate. The replicate cost is equal to its mana cost.""", 3, 5)
 
 Fathom_Feeder = Creature('Fathom Feeder', 2, My.deck, False, 'V', """Deathtouch. Ingest. VVVUB: Draw """, 1, 1)
 
-Fungus_Silver = Creature('Fungus Silver', 4, My.deck, False, 'G', """All Silver creatures have 'Whenever this 
+Fungus_Sliver = Creature('Fungus Sliver', 4, My.deck, False, 'G', """All Silver creatures have 'Whenever this 
 creature is dealt damage, put a +1/+1 counter on is.'""", 2, 2)
 
 Memnarch = Creature('Memnarch', 7, My.deck, False, 'V', """(VBB): Target permanent becomes an artifact in addition to 
