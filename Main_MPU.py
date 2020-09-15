@@ -43,6 +43,7 @@
 ## define game structure
     ## drawing cards
     ## define players
+    # define the stack
     ## phases
         ## beginning a turn
         ## main

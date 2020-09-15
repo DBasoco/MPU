@@ -95,12 +95,19 @@ class Card:
         target.items.append(self)
         self.local.items.remove(self)
 
-    def tap(self):  # this needs some kind of stopper to prevent a card from being tapped multiple times
+    def tap(self):
         if not self.tapped:
             self.tapped = True
         else:
             self.tapped = False
 
+    def read(self):
+        if type(self) == Land:
+            print('%s is a land that reads: "%s"' % (self.name, self.att))
+
+        if type(self) == Creature:
+            print('%s is a %s/%s for %s, that reads: "%s"' % (self.name, self.power, self.toughness, self.cost, self.att))
+        
 
 class Land(Card):
 
@@ -141,7 +148,7 @@ Swamp = Land('Swamp', 0, My.deck, color='B')
 Forest = Land('Forest', 0, My.deck, color='G')
 Plains = Land('Plains', 0, My.deck, color='W')
 Mountain = Land('Mountain', 0, My.deck, color='R')
-Token = Creature('Token', 0, My.deck, False, 'V', '', 1, 1)
+Token = Creature('Token', 0, My.deck, False, 'V', 'Tap: win the game.', 1, 1)
 
 
 # actual cards from the deck
@@ -213,7 +220,7 @@ print('Your field has: %s' % My.field.reveal())
 
 print(My.field.reveal(), My.field.items[0].tapped)
 
-print(My.MANA)
+My.field.items[0].read()
 
 
 
