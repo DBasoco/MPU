@@ -9,7 +9,7 @@ The server will also have the original paper uploaded for pursusal.
 
 This is also an exploration into object-oriented programming, Git sharing, and possibly server architecture once the server is created. Please enjoy going over the code. I hope to have a functioning game/server in 3/5 months. 
 
-The Main file holds the progress of the porject and will track updates.
+The Main file holds the progress of the project and will track updates.
 
 The Cards file holds the card types that can be played.
 
