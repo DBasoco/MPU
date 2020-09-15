@@ -10,7 +10,11 @@ The server will also have the original paper uploaded for pursusal.
 This is also an exploration into object-oriented programming, Git sharing, and possibly server architecture once the server is created. Please enjoy going over the code. I hope to have a functioning game/server in 3/5 months. 
 
 The Main file holds the progress of the porject and will track updates.
+
 The Cards file holds the card types that can be played.
+
 The Phase file holds how the game progresses with players, turns, and the stack.
+
 The Init file holds all the cards that you need in your deck.
+
 The Test file holds what I'm currently testing and working on before I commit it to the proper file.
