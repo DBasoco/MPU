@@ -18,3 +18,5 @@ The Phase file holds how the game progresses with players, turns, and the stack.
 The Init file holds all the cards that you need in your deck.
 
 The Test file holds what I'm currently testing and working on before I commit it to the proper file.
+
+The pdf is the full paper that I am working off of for this project.
