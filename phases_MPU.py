@@ -96,6 +96,8 @@ class Player:  # so the player is the one with health, mana, and has all the loc
 My = Player()
 Opp = Player()
 
+GG = False
+
 
 def start():  # starts the game off
     shuffle(My.deck)
@@ -109,17 +111,36 @@ def shuffle(target):  # shuffles target: can be deck, hand, graveyard, etc
     random.shuffle(target.items)
 
 
-def begin():
-    phase = ''
-    phase = ''.join('Begin')
-    for each in lands:
-        each.tap()
+def upkeep():
+    phase = 'Upkeep'
+
+    for each in My.field.items:
+        # at the start of my upkeep all my cards untap that can
+        if type(each) == Land:
+            each.tap()
+        if type(each) == Creature:
+            each.tap()
+        if type(each) == Artifact:
+            each.tap()
+
+
+def draw():
+    phase = 'Draw'
     My.deck.draw()
 
 
-def main():
-    phase = 'Main'
+def fmain():
+    phase = 'First Main'
 
 
 def combat():
     phase = 'Combat'
+
+
+def smain():
+    phase =  'Second Main'
+
+
+def end():
+    phase = 'End Step'
+

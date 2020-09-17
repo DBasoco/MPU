@@ -14,7 +14,7 @@ class Player:  # so the player is the one with health, turn counter, and has all
         self.MANA = [[], [], [], [], [], []]
         self.turn = False
 
-    def defend(self, wall, mark): # combat is so annoying, this has to be the last thing to get done
+    def defend(self, wall, mark):  # combat is so annoying, this has to be the last thing to get done
         if not 'Fly' in mark.att:
             if not 'First Strike' in mark.att:
                 wall.toughness = wall.toughness - mark.power
@@ -62,7 +62,7 @@ class Location:
             target.items.append(self.items[num])
             self.items.remove(self.items[num])
         else:
-            print("Not enough mana... \nDon't miss those land drops.")
+            print("Not enough mana... \nDon't miss those land drops.\n")
 
     def reveal(self, num=0):
         x = []
@@ -73,16 +73,23 @@ class Location:
         else:
             pass
 
+    def move(self, id, target):
+        num = self.reveal().index(id)
+        target.items.append(self.items[num])
+        self.items.remove(self.items[num])
+
 
 class Card:
 
     def __init__(self, name, cost, local, tapped=False, color='', att=''):
         """
 
+        :typr name: str
         :type local: object
-        :type cost: enumerate
+        :type cost: int
         :type tapped: bool
         :type color: str
+        :type att: str
 
         """
         self.name = name
@@ -100,18 +107,23 @@ class Card:
     def tap(self):
         if not self.tapped:
             self.tapped = True
+            if type(self) == Land:
+                self.add_mana()
         else:
             self.tapped = False
 
     def read(self):
         if type(self) == Land:
-            print('%s is a land that reads: "%s"' % (self.name, self.att))
+            print('%s is a land that reads:\n"%s"' % (self.name, self.att))
 
         if type(self) == Creature:
-            print('%s is a %s/%s for %s, that reads: "%s"' % (self.name, self.power, self.toughness, self.cost, self.att))
+            print(
+                '%s is a %s/%s for %s, that reads:\n"%s"' % (self.name, self.power, self.toughness, self.cost, self.att))
 
 
 class Land(Card):
+    def __int__(self):
+        super().__init__()
 
     def add_mana(self):
         COLORS = 'WUBRGV'
@@ -129,9 +141,8 @@ class Creature(Card):
     def __init__(self, name, cost, local, tapped, color, att, power, toughness):
         """
 
-        :type power: enumerate
-        :type toughness: enumerate
-        :type att: str
+        :type power: int
+        :type toughness: int
 
         """
         super().__init__(name, cost, local, tapped, color, att)
@@ -146,12 +157,11 @@ class Creature(Card):
 My = Player()
 Opp = Player()
 
-Swamp = Land('Swamp', 0, My.deck, color='B')
-Forest = Land('Forest', 0, My.deck, color='G')
-Plains = Land('Plains', 0, My.deck, color='W')
-Mountain = Land('Mountain', 0, My.deck, color='R')
+Swamp = Land('Swamp', 0, My.deck, color='B', att='Tap: Add one black mana to mana pool.')
+Forest = Land('Forest', 0, My.deck, color='G', att='Tap: Add one green mana to mana pool.')
+Plains = Land('Plains', 0, My.deck, color='W', att='Tap: Add one white mana to mana pool.')
+Mountain = Land('Mountain', 0, My.deck, color='R', att='Tap: Add one red mana to mana pool.')
 Token = Creature('Token', 0, My.deck, False, 'V', 'Tap: win the game.', 1, 1)
-
 
 # actual cards from the deck
 Ancient_Tomb_0 = Land('Ancient Tomb', 0, My.deck, False, 'V', """Tap: Add two colorless mana to your mana pool. 
@@ -209,22 +219,59 @@ def shuffle(target):
 
 shuffle(My.deck)
 My.deck.draw(7)
+GG = False
 
-print('Your hand has: %s' % My.hand.reveal())
-print('Your deck has: %s' % My.deck.reveal())
+while not GG:
+    print('\nYour hand has: %s' % My.hand.reveal())
 
-choice = input('Which card would you like to play? ')
+    choice = input('Which card would you like to play? ')
 
-My.hand.play(choice, My.field)
+    My.hand.play(choice, My.field)
 
-print('Your hand has: %s' % My.hand.reveal())
-print('Your field has: %s' % My.field.reveal())
-
-print(My.field.reveal(), My.field.items[0].tapped)
-
-My.field.items[0].read()
+    print('\nYour hand has: %s' % My.hand.reveal(), '\n')
 
 
+    try:
+        print('Your field has: %s' % My.field.reveal(), '\n')
+
+        print(My.field.reveal(), My.field.items[0].tapped)
+        if type() == Land: #######here currently
+            answer = input(print('Want to tap the land? [Y/n] '))
+            if answer == 'Y' or 'y':
+                answer.tap()
+                print(My.field.items[0].tapped)
+                print(My.MANA)
+
+    except IndexError:
+        pass
+
+    try:
+        My.field.items[0].read()
+        print('\n')
+    except IndexError:
+        pass
+
+    My.deck.draw(3)
+
+    while len(My.hand.items) > 7:
+        print('\nYour hand has: %s' % My.hand.reveal(), '\n')
+
+        discard = input('You have too many cards, please discard a card.\n'
+                        'Which card will you discard? ')
+
+        My.hand.move(discard, My.graveyard)
 
 
-
+# print('Your hand has: %s' % My.hand.reveal())
+# print('Your deck has: %s' % My.deck.reveal())
+#
+# choice = input('Which card would you like to play? ')
+#
+# My.hand.play(choice, My.field)
+#
+# print('Your hand has: %s' % My.hand.reveal())
+# print('Your field has: %s' % My.field.reveal())
+#
+# print(My.field.reveal(), My.field.items[0].tapped)
+#
+# My.field.items[0].read()
