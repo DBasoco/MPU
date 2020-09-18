@@ -57,6 +57,21 @@
 # add counter
 # add security
 
+
+
+
+#### Starting Hand: 1x Grim Monolith, 1x Power Artifact, 1x Ancient Tomb, 1x Staff of Domination, 2x Lotus Petal, 1x Any other card
+#### Play Order:
+#### Turn One
+#### 1. Ancient Tomb. Tap for two mana.
+#### 2. Grim Monolith.
+#### 3. Two Lotus Petals. Sacrifice for two blue mana.
+#### 4. Enchant Grim Monolith with Power Artifact.
+#### 5. Go INFINITE
+#### 6. Staff of Domination. Draw your whole deck.
+#### 7. Gem Stone Array. This let's you fix your mana pool so you can play anything you want.
+
 def duel(x, y):
     while x.health or y.health != 0:
+        # odd enough the win condition for this deck is actually Coalition Victory and happens when the blue assassin comes into play
 
