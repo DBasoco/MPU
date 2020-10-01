@@ -12,30 +12,8 @@ class Player:  # so the player is the one with health, turn counter, and has all
         self.graveyard = Location()
         self.exile = Location()
         self.MANA = [[], [], [], [], [], []]
+        self.tape = Location()
         self.turn = False
-
-    def defend(self, wall, mark):  # combat is so annoying, this has to be the last thing to get done
-        if not 'Fly' in mark.att:
-            if not 'First Strike' in mark.att:
-                wall.toughness = wall.toughness - mark.power
-                mark.toughness = mark.toughness - wall.power
-
-                if wall.toughness <= 0:
-                    wall.move_card(My.graveyard)
-                if mark.toughness <= 0:
-                    mark.move_card(Opp.graveyard)
-                if mark.trait == 'Deathtouch':
-                    wall.move_card(My.graveyard)
-            else:
-                wall.toughness = wall.toughness - mark.power
-                if wall.toughness <= 0:
-                    wall.move_card(My.graveyard)
-                else:
-                    mark.toughness = mark.toughness - wall.power
-                    if mark.toughness <= 0:
-                        mark.move_card(Opp.graveyard)
-        else:
-            self.health = self.health - mark.toughness
 
 
 class Location:
@@ -44,6 +22,8 @@ class Location:
         self.items = []
 
     def draw(self, num=1):
+        # to make the game easier I should find a way to draw an instantiated hand so that way the
+        # user isn't pressing shuffle till they get the exact right hand.
         for i in range(num):
             if not len(self.items) == 0:
                 q = self.items[len(self.items) - 1]
@@ -100,7 +80,7 @@ class Card:
         self.color = color
         self.att = att
 
-    def move_card(self, target):
+    def move_card(self, target): # is this even needed?
         target.items.append(self)
         self.local.items.remove(self)
 
@@ -148,10 +128,6 @@ class Creature(Card):
         super().__init__(name, cost, local, tapped, color, att)
         self.power = power
         self.toughness = toughness
-
-    def attack(self, mark_a):  # attacking taps but doesn't have a set mark
-        self.mark_a = mark_a
-        self.tap()
 
 
 My = Player()
@@ -223,6 +199,17 @@ GG = False
 
 while not GG:
     print('\nYour hand has: %s' % My.hand.reveal())
+
+    action = int(input('What would you like to do?\n1. Read a card in your hand\n2. Play a card from your hand\n3. Tap a card on you filed\n--> '))
+
+    if action == 1:
+        
+    elif action == 2:
+
+    elif action == 3:
+
+    else:
+        pass
 
     choice = input('Which card would you like to play? ')
 
